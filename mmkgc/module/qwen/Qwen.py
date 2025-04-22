@@ -12,7 +12,7 @@ from peft import (
     TaskType
 )
 
-class Qwen2_5_VL_Peft:
+class Qwen2_5_VL_Peft(BaseModule):
     """
     Wrapper around Qwen2.5-VL that:
       - Loads/quantizes the backbone

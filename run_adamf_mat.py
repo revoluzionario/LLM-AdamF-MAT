@@ -42,8 +42,8 @@ if __name__ == "__main__":
     
     #img_emb = torch.load('./embeddings/' + args.dataset + '-visual.pth')
     #text_emb = torch.load('./embeddings/' + args.dataset + '-textual.pth')
-    img_emb = pickle.load(open('./embeddings/' + args.dataset + '-visual.pth', 'rb'))
-    text_emb = pickle.load(open('./embeddings/' + args.dataset + '-textual.pth', 'rb'))
+    img_emb = pickle.load(open('./embeddings/' + args.dataset + '-visual.pkl', 'rb'))
+    text_emb = pickle.load(open('./embeddings/' + args.dataset + '-textual.pkl', 'rb'))
     # define the model
     kge_score = QwenAdvMixRotatE(
         qwen_model=args.qwen_model,
