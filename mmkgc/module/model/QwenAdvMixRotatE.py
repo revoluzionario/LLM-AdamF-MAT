@@ -108,8 +108,8 @@ class QwenAdvMixRotatE(Model):
         h = self.ent_embeddings(batch_h)
         t = self.ent_embeddings(batch_t)
         r = self.rel_embeddings(batch_r)
-        h_img = [self.img_list[i] for i in batch_h]
-        t_img = [self.img_list[i] for i in batch_t]
+        h_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_h]
+        t_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_t]
         h_text = [self.img_list[i] for i in batch_h]
         t_text = [self.img_list[i] for i in batch_t]
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
