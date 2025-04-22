@@ -101,11 +101,14 @@ class QwenAdvMixRotatE(Model):
         return joint
     
     def forward(self, data):
-        print(data)
         batch_h = data['batch_h']
         batch_t = data['batch_t']
         batch_r = data['batch_r']
         mode = data['mode']
+        print(len(batch_h))
+        print(len(batch_t))
+        print(len(batch_r))
+        assert False
         h = self.ent_embeddings(batch_h)
         t = self.ent_embeddings(batch_t)
         r = self.rel_embeddings(batch_r)
