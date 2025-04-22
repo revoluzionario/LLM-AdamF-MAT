@@ -105,9 +105,12 @@ class QwenAdvMixRotatE(Model):
         batch_t = data['batch_t']
         batch_r = data['batch_r']
         mode = data['mode']
-        print(len(batch_h))
-        print(len(batch_t))
-        print(len(batch_r))
+        with open("batch_h.txt", "x") as f:
+            f.write(str(batch_h))
+        with open("batch_t.txt", "x") as f:
+            f.write(str(batch_t))
+        with open("batch_r.txt", "x") as f:
+            f.write(str(batch_r))
         assert False
         h = self.ent_embeddings(batch_h)
         t = self.ent_embeddings(batch_t)
