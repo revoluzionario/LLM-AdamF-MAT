@@ -11,6 +11,7 @@ from peft import (
     LoraConfig,
     TaskType
 )
+from ..BaseModule import BaseModule
 
 class Qwen2_5_VL_Peft(BaseModule):
     """
