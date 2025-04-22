@@ -105,14 +105,14 @@ class QwenAdvMixRotatE(Model):
         batch_t = data['batch_t']
         batch_r = data['batch_r']
         mode = data['mode']
-        with open("batch_h.txt", "x") as f:
-            f.write(str(batch_h))
-        with open("batch_t.txt", "x") as f:
-            f.write(str(batch_t))
-        with open("batch_r.txt", "x") as f:
-            f.write(str(batch_r))
-        with open("mode.txt", "x") as f:
-            f.write(str(mode))
+        #with open("batch_h.txt", "x") as f:
+        #    f.write(str(batch_h))
+        #with open("batch_t.txt", "x") as f:
+        #    f.write(str(batch_t))
+        #with open("batch_r.txt", "x") as f:
+        #    f.write(str(batch_r))
+        #with open("mode.txt", "x") as f:
+        #    f.write(str(mode))
         torch.save(batch_h, "batch_h.pt")
         torch.save(batch_t, "batch_t.pt")
         torch.save(batch_r, "batch_r.pt")
