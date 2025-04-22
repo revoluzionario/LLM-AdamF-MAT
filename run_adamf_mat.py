@@ -46,7 +46,7 @@ if __name__ == "__main__":
     text_emb = pickle.load(open('./embeddings/' + args.dataset + '-textual.pkl', 'rb'))
     # define the model
     kge_score = QwenAdvMixRotatE(
-        qwen_model=args.qwen_model,
+        qwen_model=qwen,
         ent_tot=train_dataloader.get_ent_tot(),
         rel_tot=train_dataloader.get_rel_tot(),
         dim=args.dim,
