@@ -101,6 +101,7 @@ class QwenAdvMixRotatE(Model):
         return joint
     
     def forward(self, data):
+        print(data)
         batch_h = data['batch_h']
         batch_t = data['batch_t']
         batch_r = data['batch_r']
