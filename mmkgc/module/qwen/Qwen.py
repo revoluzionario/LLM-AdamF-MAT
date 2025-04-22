@@ -69,9 +69,9 @@ class Qwen2_5_VL_Peft(BaseModule):
 
     def encode(
         self,
+        es: torch.Tensor,
         images: list,
         texts: list,
-        es: torch.Tensor,
         max_length:int=128
     ) -> torch.Tensor:
         """
