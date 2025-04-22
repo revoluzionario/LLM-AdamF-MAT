@@ -2,7 +2,7 @@ from email.generator import Generator
 import torch
 import mmkgc
 from mmkgc.config import Tester, AdvMixTrainer
-from mmkgc.module.model import AdvMixRotatE
+from mmkgc.module.model import AdvMixRotatE, QwenAdvMixRotatE
 from mmkgc.module.loss import SigmoidLoss
 from mmkgc.module.strategy import NegativeSampling
 from mmkgc.data import TrainDataLoader, TestDataLoader
@@ -11,7 +11,7 @@ from mmkgc.adv.modules import MultiGenerator
 from args import get_args
 
 from mmkgc.module.qwen.Qwen import Qwen2_5_VL_Peft
-from mmkgc.module.model import QwenAdvMixRotatE
+
 import pickle
 
 if __name__ == "__main__":

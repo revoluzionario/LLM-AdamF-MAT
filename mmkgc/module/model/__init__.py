@@ -11,6 +11,7 @@ from .Model import Model
 #from .EnsembleComplEx import EnsembleComplEx
 #from .TBKGC import TBKGC
 from .AdvMixRotatE import AdvMixRotatE
+from .QwenAdvMixRotatE import QwenAdvMixRotatE
 #from .TransAE import TransAE
 #from .MMKRL import MMKRL
 
@@ -30,5 +31,6 @@ from .AdvMixRotatE import AdvMixRotatE
 
 __all__ = [
     'Model',
-    'AdvMixRotatE'
+    'AdvMixRotatE',
+    'QwenAdvMixRotatE'
 ]
