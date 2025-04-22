@@ -29,6 +29,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         quantize=True,
         device="cuda"
     ):
+        super(Qwen2_5_VL_Peft, self).__init__()
         self.device = torch.device(device)
         # 1) Optionally quantize to 4-bit for QLoRA
         if quantize:
