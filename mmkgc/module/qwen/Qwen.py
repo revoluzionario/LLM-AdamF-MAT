@@ -86,6 +86,7 @@ class Qwen2_5_VL_Peft(BaseModule):
             truncation=True,
             max_length=max_length
         ).to(self.device)
+        print(images)
         B = es.size(0)
         es = es.to(self.device)               # (B, de)
         input_ids      = inputs.input_ids       # (B, S)
