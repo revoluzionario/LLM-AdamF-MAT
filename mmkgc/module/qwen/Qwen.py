@@ -78,6 +78,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         Encode a batch of (image, text, structural_embs) pairs into a joint embedding.
         Returns: tensor of shape (B, hidden_size)
         """
+        print(images)
         inputs = self.processor(
             images=images,
             text=texts,
@@ -86,7 +87,6 @@ class Qwen2_5_VL_Peft(BaseModule):
             truncation=True,
             max_length=max_length
         ).to(self.device)
-        print(images)
         B = es.size(0)
         es = es.to(self.device)               # (B, de)
         input_ids      = inputs.input_ids       # (B, S)
