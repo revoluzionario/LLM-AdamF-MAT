@@ -111,6 +111,12 @@ class QwenAdvMixRotatE(Model):
             f.write(str(batch_t))
         with open("batch_r.txt", "x") as f:
             f.write(str(batch_r))
+        with open("mode.txt", "x") as f:
+            f.write(str(mode))
+        torch.save(batch_h, "batch_h.pt")
+        torch.save(batch_t, "batch_t.pt")
+        torch.save(batch_r, "batch_r.pt")
+        torch.save(mode, "mode.pt")
         assert False
         h = self.ent_embeddings(batch_h)
         t = self.ent_embeddings(batch_t)
