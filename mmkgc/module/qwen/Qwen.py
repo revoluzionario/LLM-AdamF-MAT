@@ -1,3 +1,4 @@
+from PIL import Image
 import torch
 import torch.nn as nn
 from transformers import (
@@ -55,7 +56,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         backbone = prepare_model_for_kbit_training(backbone)
         # 3) Apply LoRA adapters
         lora_cfg = LoraConfig(
-            task_type=TaskType.SEQ_2_SEQ_LM,
+            task_type=TaskType.FEATURE_EXTRACTION,
             inference_mode=False,
             r=lora_r,
             lora_alpha=lora_alpha,
@@ -78,8 +79,14 @@ class Qwen2_5_VL_Peft(BaseModule):
         Encode a batch of (image, text, structural_embs) pairs into a joint embedding.
         Returns: tensor of shape (B, hidden_size)
         """
+        images_list = []
+        for url in images:
+            try:
+                images_list.append(Image.open(url))
+            except Exception as e:
+                images_list.append(Image.new('RGB', (300, 200), (200, 200, 200)))
         inputs = self.processor(
-            images=images,
+            images=images_list,
             text=texts,
             return_tensors="pt",
             padding=True,

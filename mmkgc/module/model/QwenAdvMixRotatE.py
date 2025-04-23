@@ -97,6 +97,7 @@ class QwenAdvMixRotatE(Model):
         texts:     list of str, length B
         returns:   joint embedding (B, de)
         """
+        
         joint = self.qwen_model.encode(es, images, texts)
         return joint
     
@@ -110,8 +111,8 @@ class QwenAdvMixRotatE(Model):
         r = self.rel_embeddings(batch_r)
         h_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_h]
         t_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_t]
-        h_text = [self.img_list[i] for i in batch_h]
-        t_text = [self.img_list[i] for i in batch_t]
+        h_text = [self.text_list[i] for i in batch_h]
+        t_text = [self.text_list[i] for i in batch_t]
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
         t_joint = self.get_joint_embeddings(t, t_img, t_text)
         score = self.margin - self._calc(h_joint, t_joint, r, mode)
@@ -138,8 +139,8 @@ class QwenAdvMixRotatE(Model):
         r = self.rel_embeddings(batch_r)
         h_img = [self.img_list[i] for i in batch_h]
         t_img = [self.img_list[i] for i in batch_t]
-        h_text = [self.img_list[i] for i in batch_h]
-        t_text = [self.img_list[i] for i in batch_t]
+        h_text = [self.text_list[i] for i in batch_h]
+        t_text = [self.text_list[i] for i in batch_t]
         # the fake joint embedding
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
         t_joint = self.get_joint_embeddings(t, t_img, t_text)
