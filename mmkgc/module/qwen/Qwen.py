@@ -99,7 +99,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         attention_mask = inputs.attention_mask  # (B, S)
 
         # 3) Build inputs_embeds by prepending es as the soft token
-        token_embeds   = self.qwen_model.get_input_embeddings()(input_ids)  # (B, S, de)
+        token_embeds   = self.model.base_model.get_input_embeddings()(input_ids)  # (B, S, de)
         es_unsq        = es.unsqueeze(1)                                    # (B, 1, de)
         inputs_embeds  = torch.cat([es_unsq, token_embeds], dim=1)          # (B, 1+S, de)
 
