@@ -86,7 +86,9 @@ class Qwen2_5_VL_Peft(BaseModule):
                 images_list.append(Image.open(url))
             except Exception as e:
                 images_list.append(Image.new('RGB', (300, 200), (200, 200, 200)))
+        print("-------")
         print(texts)
+        print("-------")
         inputs = self.processor(
             images=images_list,
             text=texts,
