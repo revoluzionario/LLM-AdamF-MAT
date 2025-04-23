@@ -110,7 +110,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         with torch.no_grad():
             outputs = self.model.base_model(
                 pixel_values=inputs.pixel_values,
-                input_ids=inputs_embeds,
+                inputs_embeds=inputs_embeds,
                 attention_mask=new_attn_mask,
                 output_hidden_states=True,
                 return_dict=True
