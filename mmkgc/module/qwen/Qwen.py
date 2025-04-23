@@ -3,6 +3,7 @@ import torch
 import torch.nn as nn
 from transformers import (
     Qwen2_5_VLForConditionalGeneration,
+    AutoTokenizer,
     AutoProcessor,
     BitsAndBytesConfig
 )
@@ -85,6 +86,7 @@ class Qwen2_5_VL_Peft(BaseModule):
                 images_list.append(Image.open(url))
             except Exception as e:
                 images_list.append(Image.new('RGB', (300, 200), (200, 200, 200)))
+        print(texts)
         inputs = self.processor(
             images=images_list,
             text=texts,
