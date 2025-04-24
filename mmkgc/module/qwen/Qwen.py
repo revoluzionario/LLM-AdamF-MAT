@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image, ImageFile
 import torch
 import torch.nn as nn
 from transformers import (
@@ -80,6 +80,7 @@ class Qwen2_5_VL_Peft(BaseModule):
         Encode a batch of (image, text, structural_embs) pairs into a joint embedding.
         Returns: tensor of shape (B, hidden_size)
         """
+        ImageFile.LOAD_TRUNCATED_IMAGES = True
         images_list = []
         for url in images:
             try:
