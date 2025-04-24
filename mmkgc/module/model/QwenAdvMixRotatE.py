@@ -48,6 +48,9 @@ class QwenAdvMixRotatE(Model):
             b=self.rel_embedding_range.item()
         )
 
+        self.ent_attn = nn.Linear(self.dim_e, 1, bias=False)
+        self.ent_attn.requires_grad_(True)
+
         self.margin = nn.Parameter(torch.Tensor([margin]))
         self.margin.requires_grad = False
 
@@ -101,6 +104,15 @@ class QwenAdvMixRotatE(Model):
         joint = self.qwen_model.encode(es, images, texts)
         return joint
     
+    def get_joint_embeddings_fake(self, es, ev, et):
+        # es, ev, et: [num_ent, emb_dim]
+        e = torch.stack((es, ev, et), dim=1)
+        u = torch.tanh(e)
+        scores = self.ent_attn(u).squeeze(-1)
+        attention_weights = torch.softmax(scores, dim=-1)
+        context_vectors = torch.sum(attention_weights.unsqueeze(-1) * e, dim=1)
+        return context_vectors
+    
     def forward(self, data):
         batch_h = data['batch_h']
         batch_t = data['batch_t']
@@ -113,8 +125,8 @@ class QwenAdvMixRotatE(Model):
         t_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_t]
         h_text = [self.text_list[i] for i in batch_h]
         t_text = [self.text_list[i] for i in batch_t]
-        h_joint = self.get_joint_embeddings(h, h_img, h_text)
-        t_joint = self.get_joint_embeddings(t, t_img, t_text)
+        h_joint = self.get_joint_embeddings_fake(h, h_img, h_text)
+        t_joint = self.get_joint_embeddings_fake(t, t_img, t_text)
         score = self.margin - self._calc(h_joint, t_joint, r, mode)
         return score
 
