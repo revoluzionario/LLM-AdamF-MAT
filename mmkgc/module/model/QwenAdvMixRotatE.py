@@ -125,8 +125,8 @@ class QwenAdvMixRotatE(Model):
         t_img = [self.img_list[i][0] if self.img_list[i] is not None else None for i in batch_t]
         h_text = [self.text_list[i] for i in batch_h]
         t_text = [self.text_list[i] for i in batch_t]
-        h_joint = self.get_joint_embeddings_fake(h, h_img, h_text)
-        t_joint = self.get_joint_embeddings_fake(t, t_img, t_text)
+        h_joint = self.get_joint_embeddings(h, h_img, h_text)
+        t_joint = self.get_joint_embeddings(t, t_img, t_text)
         score = self.margin - self._calc(h_joint, t_joint, r, mode)
         return score
 
@@ -156,8 +156,8 @@ class QwenAdvMixRotatE(Model):
         # the fake joint embedding
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
         t_joint = self.get_joint_embeddings(t, t_img, t_text)
-        h_fake = self.get_joint_embeddings(h, fake_hv, fake_ht)
-        t_fake = self.get_joint_embeddings(t, fake_tv, fake_tt)
+        h_fake = self.get_joint_embeddings_fake(h, fake_hv, fake_ht)
+        t_fake = self.get_joint_embeddings_fake(t, fake_tv, fake_tt)
         score_h = self.margin - self._calc(h_fake, t_joint, r, mode)
         score_t = self.margin - self._calc(h_joint, t_fake, r, mode)
         score_all = self.margin - self._calc(h_fake, t_fake, r, mode)
