@@ -59,6 +59,7 @@ class AdvMixTrainer(object):
 
     def train_one_step(self, data):
         # training D
+        print(data)
         self.optimizer.zero_grad()
         loss, p_score = self.model({
             'batch_h': self.to_var(data['batch_h'], self.use_gpu),
