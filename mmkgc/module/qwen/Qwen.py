@@ -2,7 +2,7 @@ from PIL import Image, ImageFile
 import torch
 import torch.nn as nn
 from transformers import (
-    Qwen2VLForConditionalGeneration,
+    Qwen2_5_VLForConditionalGeneration,
     AutoTokenizer,
     AutoProcessor,
     BitsAndBytesConfig
@@ -24,7 +24,7 @@ class Qwen2_5_VL_Peft(BaseModule):
     """
     def __init__(
         self,
-        base_ckpt="Qwen/Qwen2-VL-2B-Instruct",
+        base_ckpt="Qwen/Qwen2.5-VL-3B-Instruct",
         lora_r=16,
         lora_alpha=32,
         lora_dropout=0.05,
@@ -41,14 +41,14 @@ class Qwen2_5_VL_Peft(BaseModule):
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_use_double_quant=True
             )
-            backbone = Qwen2VLForConditionalGeneration.from_pretrained(
+            backbone = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 base_ckpt,
                 quantization_config=bnb_config,
                 device_map="auto",
                 output_hidden_states=True
             )
         else:
-            backbone = Qwen2VLForConditionalGeneration.from_pretrained(
+            backbone = Qwen2_5_VLForConditionalGeneration.from_pretrained(
                 base_ckpt,
                 device_map={"": device},
                 output_hidden_states=True
