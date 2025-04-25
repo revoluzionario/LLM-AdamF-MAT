@@ -24,7 +24,7 @@ class Qwen2_5_VL_Peft(BaseModule):
     """
     def __init__(
         self,
-        base_ckpt="Qwen/Qwen2.5-VL-7B-Instruct",
+        base_ckpt="Qwen/Qwen2.5-VL-3B-Instruct",
         lora_r=16,
         lora_alpha=32,
         lora_dropout=0.05,
