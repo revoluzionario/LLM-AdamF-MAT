@@ -155,9 +155,9 @@ class QwenAdvMixRotatE(Model):
         t_text = [self.text_list[i] for i in batch_t]
         # the fake joint embedding
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
-        print(h_joint.shape)
+        print("h_joint:", h_joint.shape)
         t_joint = self.get_joint_embeddings(t, t_img, t_text)
-        print(t_joint.shape)
+        print("t_joint:", t_joint.shape)
         h_fake = self.get_joint_embeddings_fake(h, fake_hv, fake_ht)
         t_fake = self.get_joint_embeddings_fake(t, fake_tv, fake_tt)
         score_h = self.margin - self._calc(h_fake, t_joint, r, mode)
