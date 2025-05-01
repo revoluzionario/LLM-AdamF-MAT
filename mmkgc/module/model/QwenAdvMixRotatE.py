@@ -126,7 +126,9 @@ class QwenAdvMixRotatE(Model):
         h_text = [self.text_list[i] for i in batch_h]
         t_text = [self.text_list[i] for i in batch_t]
         h_joint = self.get_joint_embeddings(h, h_img, h_text)
+        print("h_joint_forward:", h_joint.shape)
         t_joint = self.get_joint_embeddings(t, t_img, t_text)
+        print("t_joint_forward:", t_joint.shape)
         score = self.margin - self._calc(h_joint, t_joint, r, mode)
         return score
 
